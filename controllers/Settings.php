@@ -51,7 +51,7 @@ class Settings extends BackendController
         $this->setTitleEditSettings();
         $this->setBreadcrumbEditSettings();
 
-        $this->setData('providers', $this->oauth->getProviders());
+        $this->setData('providers', $this->oauth->getProviders(array('type' => 'login')));
         $this->setData('settings', $this->config->module('social_login'));
 
         $this->submitSettings();

@@ -85,9 +85,9 @@ class SocialLogin extends Module
         // Facebook
         $providers['facebook'] = array(
             'name' => $this->language->text('Facebook'),
-            'description' => '',
             'status' => !empty($settings['status']['facebook']),
             'type' => 'login',
+            'scope' => 'email',
             'url' => array(
                 'auth' => 'https://www.facebook.com/v2.8/dialog/oauth',
                 'token' => 'https://graph.facebook.com/v2.8/oauth/access_token'
@@ -99,7 +99,6 @@ class SocialLogin extends Module
                 'client_id' => isset($settings['client_id']['facebook']) ? $settings['client_id']['facebook'] : '',
                 'client_secret' => isset($settings['client_secret']['facebook']) ? $settings['client_secret']['facebook'] : '',
             ),
-            'query' => array('scope' => 'email'),
             'template' => array('button' => 'social_login|buttons/facebook'),
             'handlers' => array(
                 'process' => array('gplcart\\modules\\social_login\\handlers\\Facebook', 'process'),
@@ -109,8 +108,8 @@ class SocialLogin extends Module
         // Google+
         $providers['google'] = array(
             'name' => $this->language->text('Google+'),
-            'description' => '',
             'type' => 'login',
+            'scope' => 'email',
             'status' => !empty($settings['status']['google']),
             'url' => array(
                 'auth' => 'https://accounts.google.com/o/oauth2/auth',
@@ -123,7 +122,6 @@ class SocialLogin extends Module
                 'client_id' => isset($settings['client_id']['google']) ? $settings['client_id']['google'] : '',
                 'client_secret' => isset($settings['client_secret']['google']) ? $settings['client_secret']['google'] : '',
             ),
-            'query' => array('scope' => 'email'),
             'template' => array('button' => 'social_login|buttons/google'),
             'handlers' => array(
                 'process' => array('gplcart\\modules\\social_login\\handlers\\Google', 'process'),
