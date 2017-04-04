@@ -113,7 +113,7 @@ class Settings extends BackendController
             $this->setSubmitted('register_status', true);
         }
 
-        return !$this->hasErrors('settings');
+        return !$this->hasErrors();
     }
 
     /**
