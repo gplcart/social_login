@@ -1,0 +1,17 @@
+{
+    "name": "Social Login",
+    "version": "1.0.0-dev",
+    "description": "Allows users to register and login to your GPL Cart site with their existing accounts from social networks",
+    "author": "Iurii Makukh ",
+    "core": "1.x",
+    "license": "GPL-3.0+",
+    "configure": "admin/module/settings/social_login",
+    "settings": {
+        "status": [],
+        "client_id": [],
+        "client_secret": [],
+        "register": true,
+        "register_login": true,
+        "register_status": true
+    }
+}

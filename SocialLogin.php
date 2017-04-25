@@ -35,31 +35,6 @@ class SocialLogin extends Module
     }
 
     /**
-     * Module info
-     * @return array
-     */
-    public function info()
-    {
-        return array(
-            'name' => 'Social Login',
-            'version' => '1.0.0-dev',
-            'description' => 'Allows users to register and login to your GPL Cart site with their existing accounts from social networks',
-            'author' => 'Iurii Makukh ',
-            'core' => '1.x',
-            'license' => 'GPL-3.0+',
-            'configure' => 'admin/module/settings/social_login',
-            'settings' => array(
-                'status' => array(),
-                'client_id' => array(),
-                'client_secret' => array(),
-                'register' => true,
-                'register_login' => true,
-                'register_status' => true
-            )
-        );
-    }
-
-    /**
      * Implements hook "route.list"
      * @param array $routes
      */
