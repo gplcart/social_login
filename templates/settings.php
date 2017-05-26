@@ -22,13 +22,13 @@
         <tbody>
           <?php foreach ($providers as $id => $provider) { ?>
           <tr>
-            <td class="middle"><?php echo $this->escape($provider['name']); ?></td>
+            <td class="middle"><?php echo $this->e($provider['name']); ?></td>
             <td class="middle">
-              <input name="settings[status][<?php echo $this->escape($id); ?>]" type="hidden" value="0">
-              <input name="settings[status][<?php echo $this->escape($id); ?>]" type="checkbox" value="1"<?php echo empty($settings['status'][$id]) ? '' : ' checked'; ?>>
+              <input name="settings[status][<?php echo $this->e($id); ?>]" type="hidden" value="0">
+              <input name="settings[status][<?php echo $this->e($id); ?>]" type="checkbox" value="1"<?php echo empty($settings['status'][$id]) ? '' : ' checked'; ?>>
             </td>
-            <td><input name="settings[client_id][<?php echo $this->escape($id); ?>]" class="form-control" value="<?php echo isset($settings['client_id'][$id]) ? $this->escape($settings['client_id'][$id]) : ''; ?>"></td>
-            <td><input name="settings[client_secret][<?php echo $this->escape($id); ?>]" class="form-control" value="<?php echo isset($settings['client_secret'][$id]) ? $this->escape($settings['client_secret'][$id]) : ''; ?>"></td>
+            <td><input name="settings[client_id][<?php echo $this->e($id); ?>]" class="form-control" value="<?php echo isset($settings['client_id'][$id]) ? $this->e($settings['client_id'][$id]) : ''; ?>"></td>
+            <td><input name="settings[client_secret][<?php echo $this->e($id); ?>]" class="form-control" value="<?php echo isset($settings['client_secret'][$id]) ? $this->e($settings['client_secret'][$id]) : ''; ?>"></td>
           </tr>
           <?php } ?>
         </tbody>
