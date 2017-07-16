@@ -71,7 +71,9 @@ class Base
             return false;
         }
 
-        $user['store_id'] = $this->store->id();
+        $store = $this->store->getCurrent();
+
+        $user['store_id'] = $store['store_id'];
         $user['password'] = $this->user->generatePassword();
 
         $user['login'] = !empty($provider['settings']['register_login']);
