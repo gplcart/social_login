@@ -95,7 +95,12 @@ class Base
             'access_token' => $params['token']
         );
 
-        $response = $this->curl->get($url, array('query' => array_filter($query)));
+        try {
+            $response = $this->curl->get($url, array('query' => array_filter($query)));
+        } catch (\Exception $ex) {
+            return array();
+        }
+
         return json_decode($response, true);
     }
 

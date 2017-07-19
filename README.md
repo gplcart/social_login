@@ -8,6 +8,10 @@ Currently supported providers:
 - Facebook
 - Google+
 
+Requirements:
+
+- CURL
+
 
 In order to use this module you need to obtain OAuth 2.0 credentials from corresponding providers. You only need `Client Id/App ID` and `Client secret/App Secret`. For redirect URIs specify `http://yourdomain.com/oauth`
 

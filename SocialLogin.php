@@ -35,12 +35,21 @@ class SocialLogin extends Module
     }
 
     /**
+     * Implements hook "module.install.before"
+     */
+    public function hookModuleInstallBefore(&$result)
+    {
+        if (!function_exists('curl_init')) {
+            $result = 'CURL library is not enabled';
+        }
+    }
+
+    /**
      * Implements hook "route.list"
      * @param array $routes
      */
     public function hookRouteList(array &$routes)
     {
-        // Module settings page
         $routes['admin/module/settings/social_login'] = array(
             'access' => 'module_edit',
             'handlers' => array(
@@ -57,7 +66,6 @@ class SocialLogin extends Module
     {
         $settings = $this->config->module('social_login');
 
-        // Facebook
         $providers['facebook'] = array(
             'name' => $this->language->text('Facebook'),
             'status' => !empty($settings['status']['facebook']),
@@ -80,7 +88,6 @@ class SocialLogin extends Module
             )
         );
 
-        // Google+
         $providers['google'] = array(
             'name' => $this->language->text('Google+'),
             'type' => 'login',
