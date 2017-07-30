@@ -10,7 +10,6 @@
 namespace gplcart\modules\social_login;
 
 use gplcart\core\Module;
-use gplcart\core\models\Language as LanguageModel;
 
 /**
  * Main class for Social Login module
@@ -19,19 +18,11 @@ class SocialLogin extends Module
 {
 
     /**
-     * Language model instance
-     * @var \gplcart\core\models\Language $language
+     * Constructor
      */
-    protected $language;
-
-    /**
-     * @param LanguageModel $language
-     */
-    public function __construct(LanguageModel $language)
+    public function __construct()
     {
         parent::__construct();
-
-        $this->language = $language;
     }
 
     /**
@@ -66,8 +57,11 @@ class SocialLogin extends Module
     {
         $settings = $this->config->module('social_login');
 
+        /* @var $language \gplcart\core\models\Language */
+        $language = $this->getModel('Language');
+
         $providers['facebook'] = array(
-            'name' => $this->language->text('Facebook'),
+            'name' => $language->text('Facebook'),
             'status' => !empty($settings['status']['facebook']),
             'type' => 'login',
             'scope' => 'email',
@@ -89,7 +83,7 @@ class SocialLogin extends Module
         );
 
         $providers['google'] = array(
-            'name' => $this->language->text('Google+'),
+            'name' => $language->text('Google+'),
             'type' => 'login',
             'scope' => 'email',
             'status' => !empty($settings['status']['google']),
