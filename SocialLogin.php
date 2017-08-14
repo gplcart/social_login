@@ -31,7 +31,7 @@ class SocialLogin extends Module
     public function hookModuleInstallBefore(&$result)
     {
         if (!function_exists('curl_init')) {
-            $result = 'CURL library is not enabled';
+            $result = $this->getLanguage()->text('CURL library is not enabled');
         }
     }
 
@@ -55,10 +55,8 @@ class SocialLogin extends Module
      */
     public function hookOauthProviders(array &$providers)
     {
+        $language = $this->getLanguage();
         $settings = $this->config->module('social_login');
-
-        /* @var $language \gplcart\core\models\Language */
-        $language = $this->getModel('Language');
 
         $providers['facebook'] = array(
             'name' => $language->text('Facebook'),
