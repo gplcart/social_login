@@ -27,6 +27,9 @@ class Google extends BaseHandler
 
     /**
      * Process Google+ authorization
+     * @param array $params
+     * @param array $provider
+     * @return mixed
      */
     public function process(array $params, array $provider)
     {
@@ -35,6 +38,7 @@ class Google extends BaseHandler
         if (isset($user['email']) && !empty($user['verified_email'])) {
             return $this->submitUser($user, $provider);
         }
+
         return false;
     }
 

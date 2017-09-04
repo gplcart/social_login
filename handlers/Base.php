@@ -48,6 +48,7 @@ class Base
     /**
      * Login/register a new user
      * @param array $user
+     * @param array $provider
      * @return mixed
      */
     protected function submitUser(array $user, array $provider)
@@ -63,6 +64,8 @@ class Base
 
     /**
      * Register a new user
+     * @param array $user
+     * @param array $provider
      * @return mixed
      */
     protected function registerUser(array $user, array $provider)
