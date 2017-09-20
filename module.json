@@ -1,7 +1,7 @@
 {
     "name": "Social Login",
     "version": "1.0.0-dev",
-    "description": "Allows users to register and login to your GPL Cart site with their existing accounts from social networks",
+    "description": "Allows users to register and log in with their social network profiles",
     "author": "Iurii Makukh ",
     "core": "1.x",
     "license": "GPL-3.0+",
