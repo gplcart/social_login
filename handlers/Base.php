@@ -94,17 +94,14 @@ class Base
      */
     protected function requestData(array $params, $url, $query = array())
     {
-        $query += array(
-            'access_token' => $params['token']
-        );
-
         try {
+            $query += array('access_token' => $params['token']);
             $response = $this->curl->get($url, array('query' => array_filter($query)));
+            return json_decode($response, true);
         } catch (\Exception $ex) {
+            trigger_error($ex->getMessage());
             return array();
         }
-
-        return json_decode($response, true);
     }
 
 }
