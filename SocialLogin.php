@@ -9,7 +9,8 @@
 
 namespace gplcart\modules\social_login;
 
-use gplcart\core\Module;
+use gplcart\core\Module,
+    gplcart\core\Config;
 
 /**
  * Main class for Social Login module
@@ -18,11 +19,11 @@ class SocialLogin extends Module
 {
 
     /**
-     * Constructor
+     * @param Config $config
      */
-    public function __construct()
+    public function __construct(Config $config)
     {
-        parent::__construct();
+        parent::__construct($config);
     }
 
     /**
@@ -57,7 +58,7 @@ class SocialLogin extends Module
     public function hookOauthProviders(array &$providers)
     {
         $language = $this->getLanguage();
-        $settings = $this->config->module('social_login');
+        $settings = $this->config->getFromModule('social_login');
 
         $providers['facebook'] = array(
             'name' => $language->text('Facebook'),
