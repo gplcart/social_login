@@ -9,32 +9,26 @@
 
 namespace gplcart\modules\social_login;
 
-use gplcart\core\Module,
-    gplcart\core\Config;
+use gplcart\core\Module;
 
 /**
  * Main class for Social Login module
  */
-class SocialLogin extends Module
+class SocialLogin
 {
 
     /**
-     * @param Config $config
+     * Module class instance
+     * @var \gplcart\core\Module $module
      */
-    public function __construct(Config $config)
-    {
-        parent::__construct($config);
-    }
+    protected $module;
 
     /**
-     * Implements hook "module.install.before"
-     * @param null|string $result
+     * @param Module $module
      */
-    public function hookModuleInstallBefore(&$result)
+    public function __construct(Module $module)
     {
-        if (!function_exists('curl_init')) {
-            $result = $this->getLanguage()->text('CURL library is not enabled');
-        }
+        $this->module = $module;
     }
 
     /**
@@ -57,11 +51,10 @@ class SocialLogin extends Module
      */
     public function hookOauthProviders(array &$providers)
     {
-        $language = $this->getLanguage();
-        $settings = $this->config->getFromModule('social_login');
+        $settings = $this->module->getSettings('social_login');
 
         $providers['facebook'] = array(
-            'name' => $language->text('Facebook'),
+            'name' => 'Facebook',
             'status' => !empty($settings['status']['facebook']),
             'type' => 'login',
             'scope' => 'email',
@@ -83,7 +76,7 @@ class SocialLogin extends Module
         );
 
         $providers['google'] = array(
-            'name' => $language->text('Google+'),
+            'name' => 'Google+',
             'type' => 'login',
             'scope' => 'email',
             'status' => !empty($settings['status']['google']),

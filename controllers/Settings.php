@@ -9,8 +9,7 @@
 
 namespace gplcart\modules\social_login\controllers;
 
-use gplcart\core\models\Oauth as OauthModel,
-    gplcart\core\models\Module as ModuleModel;
+use gplcart\core\models\Oauth as OauthModel;
 use gplcart\core\controllers\backend\Controller as BackendController;
 
 /**
@@ -20,27 +19,19 @@ class Settings extends BackendController
 {
 
     /**
-     * Module model instance
-     * @var \gplcart\core\models\Module $module
-     */
-    protected $module;
-
-    /**
      * Oauth model instance
      * @var \gplcart\core\models\Oauth $oauth
      */
     protected $oauth;
 
     /**
-     * @param ModuleModel $module
      * @param OauthModel $oauth
      */
-    public function __construct(ModuleModel $module, OauthModel $oauth)
+    public function __construct(OauthModel $oauth)
     {
         parent::__construct();
 
         $this->oauth = $oauth;
-        $this->module = $module;
     }
 
     /**
@@ -51,8 +42,8 @@ class Settings extends BackendController
         $this->setTitleEditSettings();
         $this->setBreadcrumbEditSettings();
 
+        $this->setData('settings', $this->module->getSettings('social_login'));
         $this->setData('providers', $this->oauth->getProviders(array('type' => 'login')));
-        $this->setData('settings', $this->config->getFromModule('social_login'));
 
         $this->submitSettings();
         $this->outputEditSettings();
@@ -63,8 +54,7 @@ class Settings extends BackendController
      */
     protected function setTitleEditSettings()
     {
-        $vars = array('%name' => $this->text('Social Login'));
-        $title = $this->text('Edit %name settings', $vars);
+        $title = $this->text('Edit %name settings', array('%name' => $this->text('Social Login')));
         $this->setTitle($title);
     }
 
