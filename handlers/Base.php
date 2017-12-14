@@ -18,10 +18,10 @@ class Base
 {
 
     /**
-     * Curl helper instance
-     * @var \gplcart\core\helpers\Curl $curl
+     * Socket client helper instance
+     * @var \gplcart\core\helpers\SocketClient $socket
      */
-    protected $curl;
+    protected $socket;
 
     /**
      * User model instance
@@ -41,8 +41,18 @@ class Base
     public function __construct()
     {
         $this->user = Container::get('gplcart\\core\\models\\User');
-        $this->curl = Container::get('gplcart\\core\\helpers\\Curl');
         $this->store = Container::get('gplcart\\core\\models\\Store');
+        $this->socket = Container::get('gplcart\\core\\helpers\\SocketClient');
+    }
+
+    /**
+     * Sets a property
+     * @param string $property
+     * @param mixed $value
+     */
+    public function setProperty($property, $value)
+    {
+        $this->{$property} = $value;
     }
 
     /**
@@ -78,7 +88,6 @@ class Base
 
         $user['store_id'] = $store['store_id'];
         $user['password'] = $this->user->generatePassword();
-
         $user['login'] = !empty($provider['settings']['register_login']);
         $user['status'] = !empty($provider['settings']['register_status']);
 
@@ -96,8 +105,8 @@ class Base
     {
         try {
             $query += array('access_token' => $params['token']);
-            $response = $this->curl->get($url, array('query' => array_filter($query)));
-            return json_decode($response, true);
+            $response = $this->socket->request($url, array('query' => array_filter($query)));
+            return json_decode($response['data'], true);
         } catch (\Exception $ex) {
             trigger_error($ex->getMessage());
             return array();
