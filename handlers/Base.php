@@ -30,6 +30,12 @@ class Base
     protected $user;
 
     /**
+     * User access model instance
+     * @var \gplcart\core\models\UserAction $user_action
+     */
+    protected $user_action;
+
+    /**
      * Store model instance
      * @var \gplcart\core\models\Store $store
      */
@@ -43,6 +49,7 @@ class Base
         $this->user = Container::get('gplcart\\core\\models\\User');
         $this->store = Container::get('gplcart\\core\\models\\Store');
         $this->socket = Container::get('gplcart\\core\\helpers\\SocketClient');
+        $this->user_action = Container::get('gplcart\\core\\models\\UserAction');
     }
 
     /**
@@ -69,7 +76,7 @@ class Base
             return $this->registerUser($user, $provider);
         }
 
-        return $this->user->login($existing, false);
+        return $this->user_action->login($existing, false);
     }
 
     /**
@@ -84,14 +91,14 @@ class Base
             return false;
         }
 
-        $store = $this->store->getCurrent();
+        $store = $this->store->get();
 
         $user['store_id'] = $store['store_id'];
         $user['password'] = $this->user->generatePassword();
         $user['login'] = !empty($provider['settings']['register_login']);
         $user['status'] = !empty($provider['settings']['register_status']);
 
-        return $this->user->register($user);
+        return $this->user_action->register($user);
     }
 
     /**
