@@ -9,12 +9,12 @@
 
 namespace gplcart\modules\social_login;
 
-use gplcart\core\Module as CoreModule;
+use gplcart\core\Module;
 
 /**
  * Main class for Social Login module
  */
-class Module
+class Main
 {
 
     /**
@@ -24,9 +24,9 @@ class Module
     protected $module;
 
     /**
-     * @param CoreModule $module
+     * @param Module $module
      */
-    public function __construct(CoreModule $module)
+    public function __construct(Module $module)
     {
         $this->module = $module;
     }
