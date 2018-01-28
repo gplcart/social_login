@@ -1,13 +1,20 @@
 {
-    "name": "gplcart/social_login",
-    "type": "gplcart-module",
-    "description": "Allows users to register and login to your GPL Cart site with their existing accounts from social networks",
-    "keywords": ["gplcart", "ecommerce", "shopping cart", "gplcart module", "php", "oauth"],
-    "license": "GPL-3.0+",
-    "require": {
-        "gplcart/composer-module-installer": "*",
-        "ext-curl": "*"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+  "name": "gplcart/social_login",
+  "type": "gplcart-module",
+  "description": "Allows users to register and login to your GPL Cart site with their existing accounts from social networks",
+  "keywords": [
+    "gplcart",
+    "ecommerce",
+    "shopping cart",
+    "gplcart module",
+    "php",
+    "oauth"
+  ],
+  "license": "GPL-3.0-or-later",
+  "require": {
+    "gplcart/composer-module-installer": "*",
+    "ext-curl": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
