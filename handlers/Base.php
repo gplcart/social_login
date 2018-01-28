@@ -19,7 +19,7 @@ class Base
 
     /**
      * Socket client helper instance
-     * @var \gplcart\core\helpers\SocketClient $socket
+     * @var \gplcart\core\helpers\Socket $socket
      */
     protected $socket;
 
@@ -48,7 +48,7 @@ class Base
     {
         $this->user = Container::get('gplcart\\core\\models\\User');
         $this->store = Container::get('gplcart\\core\\models\\Store');
-        $this->socket = Container::get('gplcart\\core\\helpers\\SocketClient');
+        $this->socket = Container::get('gplcart\\core\\helpers\\Socket');
         $this->user_action = Container::get('gplcart\\core\\models\\UserAction');
     }
 
