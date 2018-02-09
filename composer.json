@@ -1,13 +1,15 @@
 {
   "name": "gplcart/social_login",
   "type": "gplcart-module",
-  "description": "Allows users to register and login to your GPL Cart site with their existing accounts from social networks",
+  "description": "Allows to register and log in users using credentials from their social network accounts",
   "keywords": [
     "gplcart",
     "ecommerce",
     "shopping cart",
     "gplcart module",
     "php",
+    "googl+",
+    "facebook",
     "oauth"
   ],
   "license": "GPL-3.0-or-later",

@@ -10,6 +10,8 @@
 namespace gplcart\modules\social_login\handlers;
 
 use gplcart\core\Container;
+use OutOfRangeException;
+use UnexpectedValueException;
 
 /**
  * Base class for other Oauth 2.0 providers
@@ -18,10 +20,10 @@ class Base
 {
 
     /**
-     * Socket client helper instance
-     * @var \gplcart\core\helpers\Socket $socket
+     * Http model instance instance
+     * @var \gplcart\core\models\Http $http
      */
-    protected $socket;
+    protected $http;
 
     /**
      * User model instance
@@ -46,9 +48,9 @@ class Base
      */
     public function __construct()
     {
+        $this->http = Container::get('gplcart\\core\\models\\Http');
         $this->user = Container::get('gplcart\\core\\models\\User');
         $this->store = Container::get('gplcart\\core\\models\\Store');
-        $this->socket = Container::get('gplcart\\core\\helpers\\Socket');
         $this->user_action = Container::get('gplcart\\core\\models\\UserAction');
     }
 
@@ -66,10 +68,15 @@ class Base
      * Login/register a new user
      * @param array $user
      * @param array $provider
-     * @return mixed
+     * @return array
+     * @throws OutOfRangeException
      */
     protected function submitUser(array $user, array $provider)
     {
+        if (empty($user['email'])) {
+            throw new OutOfRangeException("Empty user ID in the submitting user data");
+        }
+
         $existing = $this->user->getByEmail($user['email']);
 
         if (empty($existing)) {
@@ -83,12 +90,12 @@ class Base
      * Register a new user
      * @param array $user
      * @param array $provider
-     * @return mixed
+     * @return array
      */
     protected function registerUser(array $user, array $provider)
     {
         if (empty($provider['settings']['register'])) {
-            return false;
+            return array();
         }
 
         $store = $this->store->get();
@@ -106,18 +113,28 @@ class Base
      * @param array $params
      * @param string $url
      * @param array $query
-     * @return mixed
+     * @return array
+     * @throws UnexpectedValueException
      */
-    protected function requestData(array $params, $url, $query = array())
+    protected function request(array $params, $url, $query = array())
     {
-        try {
-            $query += array('access_token' => $params['token']);
-            $response = $this->socket->request($url, array('query' => array_filter($query)));
-            return json_decode($response['data'], true);
-        } catch (\Exception $ex) {
-            trigger_error($ex->getMessage());
-            return array();
+        if (!isset($query['access_token']) && isset($params['token']['access_token'])) {
+            $query['access_token'] = $params['token']['access_token'];
         }
+
+        $response = $this->http->request($url, array('query' => array_filter($query)));
+
+        if ($response['status']['code'] != 200) {
+            throw new UnexpectedValueException("Expected response code - 200, received - {$response['status']['code']}");
+        }
+
+        $decoded = json_decode($response['data'], true);
+
+        if (empty($decoded) || !is_array($decoded)) {
+            throw new UnexpectedValueException('Failed to decode response data');
+        }
+
+        return $decoded;
     }
 
 }

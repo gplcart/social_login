@@ -31,15 +31,15 @@ class Google extends BaseHandler
      * @param array $provider
      * @return mixed
      */
-    public function process(array $params, array $provider)
+    public function authorize(array $params, array $provider)
     {
-        $user = $this->requestData($params, 'https://www.googleapis.com/oauth2/v1/userinfo');
+        $user = $this->request($params, 'https://www.googleapis.com/oauth2/v2/userinfo');
 
-        if (isset($user['email']) && !empty($user['verified_email'])) {
+        if (!empty($user['verified_email'])) {
             return $this->submitUser($user, $provider);
         }
 
-        return false;
+        return array();
     }
 
 }

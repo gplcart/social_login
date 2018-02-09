@@ -3,7 +3,7 @@
 /**
  * @package Social Login
  * @author Iurii Makukh <gplcart.software@gmail.com>
- * @copyright Copyright (c) 2015, Iurii Makukh
+ * @copyright Copyright (c) 2018, Iurii Makukh
  * @license https://www.gnu.org/licenses/gpl.html GNU/GPLv3
  */
 
@@ -31,15 +31,10 @@ class Facebook extends BaseHandler
      * @param array $provider
      * @return mixed
      */
-    public function process(array $params, array $provider)
+    public function authorize(array $params, array $provider)
     {
-        $query = array('fields' => 'name,email');
-        $user = $this->requestData($params, 'https://graph.facebook.com/me', $query);
-
-        if (isset($user['email'])) {
-            return $this->submitUser($user, $provider);
-        }
-        return false;
+        $user = $this->request($params, 'https://graph.facebook.com/me', array('fields' => 'name,email'));
+        return $this->submitUser($user, $provider);
     }
 
 }

@@ -1,7 +1,7 @@
 [![Build Status](https://scrutinizer-ci.com/g/gplcart/social_login/badges/build.png?b=master)](https://scrutinizer-ci.com/g/gplcart/social_login/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/gplcart/social_login/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/gplcart/social_login/?branch=master)
 
-Social Login is a [GPL Cart](https://github.com/gplcart/gplcart) module that allows users to register and login to your GPL Cart site with their existing accounts from social networks.
+Social Login is a [GPL Cart](https://github.com/gplcart/gplcart) module that allows to register and log in users using credentials from their social network accounts.
 
 Currently supported providers:
 
@@ -10,10 +10,10 @@ Currently supported providers:
 
 Requirements:
 
-- CURL
+- [Oauth module](https://github.com/gplcart/oauth)
 
 
-In order to use this module you need to obtain OAuth 2.0 credentials from corresponding providers. You only need `Client Id/App ID` and `Client secret/App Secret`. For redirect URIs specify `http://yourdomain.com/oauth`
+In order to use this module you need to obtain OAuth 2.0 credentials from the corresponding providers. You only need `Client Id/App ID` and `Client secret/App Secret`. For redirect URIs specify `http://yourdomain.com/oauth`
 
 **Installation**
 

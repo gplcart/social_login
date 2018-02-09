@@ -1,17 +1,20 @@
 {
-    "name": "Social Login",
-    "version": "1.0.0-dev",
-    "description": "Allows users to register and log in with their social network profiles",
-    "author": "Iurii Makukh ",
-    "core": "1.x",
-    "license": "GPL-3.0+",
-    "configure": "admin/module/settings/social_login",
-    "settings": {
-        "status": [],
-        "client_id": [],
-        "client_secret": [],
-        "register": true,
-        "register_login": true,
-        "register_status": true
-    }
+  "name": "Social Login",
+  "version": "1.0.0-dev",
+  "description": "Allows to register and log in users using credentials from their social network accounts",
+  "author": "Iurii Makukh ",
+  "core": "1.x",
+  "license": "GPL-3.0+",
+  "configure": "admin/module/settings/social_login",
+  "settings": {
+    "status": [],
+    "client_id": [],
+    "client_secret": [],
+    "register": true,
+    "register_login": true,
+    "register_status": true
+  },
+  "dependencies": {
+    "oauth": "1.x"
+  }
 }
