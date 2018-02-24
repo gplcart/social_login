@@ -7,10 +7,7 @@
     "ecommerce",
     "shopping cart",
     "gplcart module",
-    "php",
-    "googl+",
-    "facebook",
-    "oauth"
+    "php"
   ],
   "license": "GPL-3.0-or-later",
   "require": {
