@@ -9,22 +9,11 @@
 
 namespace gplcart\modules\social_login\handlers;
 
-use gplcart\modules\social_login\handlers\Base as BaseHandler;
-
 /**
  * Contains methods for authorization with Facebook
  */
-class Facebook extends BaseHandler
+class Facebook extends Provider
 {
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     /**
      * Process Facebook authorization
      * @param array $params

@@ -16,7 +16,7 @@ use UnexpectedValueException;
 /**
  * Base class for other Oauth 2.0 providers
  */
-class Base
+class Provider
 {
 
     /**

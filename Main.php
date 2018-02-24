@@ -10,7 +10,7 @@
 namespace gplcart\modules\social_login;
 
 use Exception;
-use gplcart\core\Controller;
+use gplcart\core\controllers\frontend\Controller;
 use gplcart\core\Module;
 use InvalidArgumentException;
 
@@ -38,7 +38,7 @@ class Main
      * Implements hook "construct.controller.frontend"
      * @param \gplcart\core\controllers\frontend\Controller $controller
      */
-    public function hookConstructControllerFrontend($controller)
+    public function hookConstructControllerFrontend(Controller $controller)
     {
         if (!$controller->isInternalRoute() && !$controller->isLoggedIn()) {
 
@@ -82,11 +82,8 @@ class Main
      * @return array
      * @throws InvalidArgumentException
      */
-    public function getButtons($controller, array $params = array())
+    public function getButtons(Controller $controller, array $params = array())
     {
-        if (!$controller instanceof Controller) {
-            throw new InvalidArgumentException('First argument must be instance of \gplcart\core\Controller');
-        }
 
         /** @var \gplcart\modules\oauth\Main $module */
         $module = $this->module->getInstance('oauth');
@@ -114,7 +111,7 @@ class Main
      * @param \gplcart\core\controllers\frontend\Controller $controller
      * @return array
      */
-    protected function getButtonsSafely($controller)
+    protected function getButtonsSafely(Controller $controller)
     {
         try {
             return $this->getButtons($controller);

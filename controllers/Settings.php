@@ -9,13 +9,13 @@
 
 namespace gplcart\modules\social_login\controllers;
 
-use gplcart\core\controllers\backend\Controller as BackendController;
-use gplcart\modules\oauth\models\Oauth as ModuleOauthModel;
+use gplcart\core\controllers\backend\Controller;
+use gplcart\modules\oauth\models\Oauth;
 
 /**
  * Handles incoming requests and outputs data related to Social Login module
  */
-class Settings extends BackendController
+class Settings extends Controller
 {
 
     /**
@@ -25,9 +25,10 @@ class Settings extends BackendController
     protected $oauth;
 
     /**
-     * @param ModuleOauthModel $oauth
+     * Settings constructor.
+     * @param Oauth $oauth
      */
-    public function __construct(ModuleOauthModel $oauth)
+    public function __construct(Oauth $oauth)
     {
         parent::__construct();
 
@@ -54,7 +55,9 @@ class Settings extends BackendController
      */
     protected function setTitleEditSettings()
     {
-        $title = $this->text('Edit %name settings', array('%name' => $this->text('Social Login')));
+        $title = $this->text('Edit %name settings', array(
+            '%name' => $this->text('Social Login')));
+
         $this->setTitle($title);
     }
 
@@ -112,7 +115,6 @@ class Settings extends BackendController
     protected function updateSettings()
     {
         $this->controlAccess('module_edit');
-
         $this->module->setSettings('social_login', $this->getSubmitted());
         $this->redirect('', $this->text('Settings have been updated'), 'success');
     }
